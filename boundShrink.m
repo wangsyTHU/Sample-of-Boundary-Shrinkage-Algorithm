@@ -137,7 +137,7 @@ function [paramb, status, outDistVec, parambVec] = boundShrink(matE, matf, matC,
         outDistVec = [outDistVec, valDist];
 
         if abs(value(objDist)) < 1e-6
-            disp('Bound shrinkage Finshed !')
+            disp('Boundary Shrinkage Finshed !')
             status = 0;
             break
         end

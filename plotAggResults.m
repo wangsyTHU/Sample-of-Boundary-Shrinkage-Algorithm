@@ -72,8 +72,8 @@ figure(3); hold on
 plot(outDistVec, 'LineWidth', 1.5, 'Color', lowerBoundColor)
 set(gca, 'FontName', 'Arial', 'FontSize', 12);
 title('Convergence process', 'FontName', 'Arial', 'FontSize', 12);
-xlabel('# Iterations', 'FontName', 'Arial', 'FontSize', 12);
-ylabel('Maximum distance', 'FontName', 'Arial', 'FontSize', 12)
+xlabel('Iterations', 'FontName', 'Arial', 'FontSize', 12);
+ylabel('Maximum outlier distance', 'FontName', 'Arial', 'FontSize', 12)
 
 
 

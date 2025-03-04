@@ -70,7 +70,7 @@ paramA = [eye(numT), -eye(numT), rampMat, -rampMat]';
 [paramb, status, outDistVec, parambVec] = boundShrink(matE, matf, matC, zeros(numT, 1), paramA);
 
 % plot result
-plotGenCluster
+plotAggResults
 
 
 
