@@ -5,7 +5,7 @@
 - [YALMIP](https://yalmip.github.io/)
 - [GUROBI](https://www.gurobi.com/) solver
 
-## Usage
+## Usage 
 
 This case demonstrates the boundary shrinkage algorithm, which is used to aggregate the flexibility of a cluster of diverse generators. The aggregation results define the upper and lower bounds for both power and ramp rates of the equivalent generator.
 
