@@ -58,25 +58,48 @@ function [paramb, status, outDistVec, parambVec] = boundShrink(matE, matf, matC,
     while true
 
         % view paramb in the iteration process
-        maxPclus = paramb(1:dimXbd, :);
-        minPclus = -paramb(dimXbd + 1:2 * dimXbd, :);
-        maxRclus = paramb(2 * dimXbd + 1:3 * dimXbd - 1, :);
-        minRclus = -paramb(3 * dimXbd:end, :);
+        if size(paramb, 1) == 4*dimXbd % virtual energy storage
+            maxPclus = paramb(1:dimXbd, :);
+            minPclus = -paramb(dimXbd + 1:2 * dimXbd, :);
+            maxEclus = paramb(2 * dimXbd + 1:3 * dimXbd, :);
+            minEclus = -paramb(3 * dimXbd + 1:end, :);
 
-        figure(1);
-        subplot(2, 1, 1); hold on
-        title('Pclus output power')
-        plot(maxPclus, 'r')
-        plot(minPclus, 'b')
-        xlabel('Time')
-        ylabel('Power')
+            figure(1);
+            subplot(2, 1, 1); hold on
+            title('Pclus output power')
+            plot(maxPclus, 'r')
+            plot(minPclus, 'b')
+            xlabel('Time')
+            ylabel('Power')
 
-        subplot(2, 1, 2); hold on
-        title('Pclus ramp rate')
-        plot(maxRclus, 'r')
-        plot(minRclus, 'b')
-        xlabel('Time')
-        ylabel('Ramp rate')
+            subplot(2, 1, 2); hold on
+            title('Eclus energy bounds')
+            plot(maxEclus, 'r')
+            plot(minEclus, 'b')
+            xlabel('Time')
+            ylabel('Energy Bound')
+        
+        else % virtual generator
+            maxPclus = paramb(1:dimXbd, :);
+            minPclus = -paramb(dimXbd + 1:2 * dimXbd, :);
+            maxRclus = paramb(2 * dimXbd + 1:3 * dimXbd - 1, :);
+            minRclus = -paramb(3 * dimXbd:end, :);
+
+            figure(1);
+            subplot(2, 1, 1); hold on
+            title('Pclus output power')
+            plot(maxPclus, 'r')
+            plot(minPclus, 'b')
+            xlabel('Time')
+            ylabel('Power')
+
+            subplot(2, 1, 2); hold on
+            title('Rclus ramp rate')
+            plot(maxRclus, 'r')
+            plot(minRclus, 'b')
+            xlabel('Time')
+            ylabel('Ramp rate')
+        end
 
         pause(0.1)
 
@@ -136,7 +159,7 @@ function [paramb, status, outDistVec, parambVec] = boundShrink(matE, matf, matC,
         valDist = value(objDist);
         outDistVec = [outDistVec, valDist];
 
-        if abs(value(objDist)) < 1e-6
+        if abs(value(objDist)) < 1e-4
             disp('Boundary Shrinkage Finshed !')
             status = 0;
             break
