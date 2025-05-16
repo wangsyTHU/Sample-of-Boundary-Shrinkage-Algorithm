@@ -26,6 +26,13 @@ function [paramb, status, outDistVec, parambVec] = boundShrink(matE, matf, matC,
 
     % constraints of inner variables
     consInt = [matE * varXint <= matf];
+
+    solInt = optimize(consInt, [], sdpsettings('verbose', 0, 'solver', 'gurobi'));
+    if solInt.problem ~= 0
+        warning(['Constraints of inner variables (matE * varXint <= matf) error: ', solInt.info])
+        return
+    end
+
     % equalities between boundary variables and inner variables
     consBdInt = [varXbd == matC * varXint + matd];
 
